@@ -1,19 +1,15 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import InsertForm from "./InsertForm";
 
 export default function ShoppingList() {
-  // Fake data
-  const [items, setItems] = useState([
-    { id: 1, text: "Pão" },
-    { id: 2, text: "Salsicha" },
-    { id: 3, text: "Ketchup" },
-  ]);
+  const [items, setItems] = useState([]);
 
   useEffect(loadItems, []);
 
   function loadItems() {
-    // Get items from back-end and update state
+    const request = axios.get("http://localhost:4000/items").then(response => {setItems(response.data)}).catch(erro => alert("Erro"));
   }
 
   return (
